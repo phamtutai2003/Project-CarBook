@@ -43,7 +43,7 @@
 	          <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="services.jsp" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="pricing.jsp" class="nav-link">Pricing</a></li>
-	          <li class="nav-item"><a href="car.jsp" class="nav-link">Cars</a></li>
+	          <li class="nav-item"><a href="/cars" class="nav-link">Cars</a></li>
 	          <li class="nav-item"><a href="blog.jsp" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
 	        </ul>

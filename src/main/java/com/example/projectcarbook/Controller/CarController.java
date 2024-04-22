@@ -1,13 +1,16 @@
 package com.example.projectcarbook.Controller;
 
 import com.example.projectcarbook.Dao.CarDao;
+import com.example.projectcarbook.Dao.CustomerDao;
 import com.example.projectcarbook.Model.Car;
+import com.example.projectcarbook.Model.Customer;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -50,14 +53,19 @@ public class CarController extends HttpServlet {
     private void findAll(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<Car> cars = carDao.findAll();
         req.setAttribute("cars", cars);
-        req.getRequestDispatcher("car.jsp").forward(req, res);
+        req.getRequestDispatcher("/car.jsp").forward(req, res);
     }
 
 
     private void findOne(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Car car = carDao.findById(id);
+
+        // Lấy thông tin của khách hàng từ bảng khách hàng
+        Customer customer = CustomerDao.findById(car.getCustomerId());
+
         req.setAttribute("car", car);
+        req.setAttribute("customer", customer); // Đưa thông tin của khách hàng vào request để sử dụng trong JSP
         req.getRequestDispatcher("car-single.jsp").forward(req, res);
     }
 

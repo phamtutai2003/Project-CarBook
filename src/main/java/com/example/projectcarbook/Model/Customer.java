@@ -57,4 +57,10 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public void setCustomerId(int customerId) {
+    }
+
+    public void setCustomerName(String customerName) {
+    }
 }

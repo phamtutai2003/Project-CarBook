@@ -4,7 +4,7 @@ import com.example.projectcarbook.Dao.connection.MyConnection;
 import com.example.projectcarbook.Model.Booking;
 
 
-import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingDao {
-    // Phương thức để lấy danh sách tất cả các booking từ cơ sở dữ liệu
+
     public List<Booking> findAll() {
         List<Booking> bookings = new ArrayList<>();
         try (Connection connection = MyConnection.getConnection();

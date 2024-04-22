@@ -17,6 +17,51 @@ public class CustomerDao {
         connection = MyConnection.getInstance();
     }
 
+    public static Customer findById(int customerId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Customer customer = null;
+
+        try {
+            // Kết nối tới cơ sở dữ liệu
+            connection = MyConnection.getConnection();
+            // Chuẩn bị truy vấn SQL
+            String sql = "SELECT * FROM Customer WHERE customerId = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            // Thiết lập tham số cho truy vấn
+            preparedStatement.setInt(1, customerId);
+            // Thực thi truy vấn
+            resultSet = preparedStatement.executeQuery();
+            // Xử lý kết quả trả về
+            if (resultSet.next()) {
+                // Tạo đối tượng Customer từ dữ liệu của bảng
+                customer = new Customer();
+                customer.setCustomerId(resultSet.getInt("customerId"));
+                customer.setCustomerName(resultSet.getString("customerName"));
+                // Các trường thông tin khác của khách hàng
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng kết nối và các tài nguyên
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return customer;
+    }
+
     public boolean addCustomer(Customer customer) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO)) {
             preparedStatement.setString(1, customer.getName());

@@ -14,7 +14,7 @@ public class CarDao {
     public List<Car> findAll() {
         List<Car> cars = new ArrayList<>();
         try (Connection connection = MyConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Car");
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM car");
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -23,7 +23,7 @@ public class CarDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Xử lý ngoại lệ ở đây nếu cần thiết
+
         }
         return cars;
     }
@@ -31,7 +31,7 @@ public class CarDao {
     public Car findById(int id) {
         Car car = null;
         try (Connection connection = MyConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Car WHERE ID = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM car WHERE ID = ?")) {
 
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
